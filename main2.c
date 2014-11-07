@@ -6,7 +6,7 @@
 /*   By: ihermell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/06 18:08:24 by ihermell          #+#    #+#             */
-/*   Updated: 2014/11/06 20:23:24 by ihermell         ###   ########.fr       */
+/*   Updated: 2014/11/07 12:03:44 by ihermell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,7 @@ void	test_strequ()
 	
 	dprintf(1, "Strequ			");
 	while (++i < 4) {
+		j = -1;
 		while (++j < 4) {
 			if (strcmp(str[i], str[j]) == 0 && ft_strequ(str[i], str[j]) != 1) {
 				dprintf(1, "\x1b[31mFail\x1b[0m\n	Params:\n		s1 : '%s'\n		s2 : '%s'\n\n		Valeur attendue : 1\n		Valeur obtenue : %d\n", str[i], str[j],ft_strequ(str[i], str[j]));
@@ -211,12 +212,14 @@ void	test_strnequ()
 {
 	char	str[4][15] = {"", " ", "Hello", "Motherfucker"};
 	int	i = -1;
-	int	j = -1;
-	int k = -1;
+	int	j;
+	int k;
 	
 	dprintf(1, "Strnequ			");
 	while (++i < 4) {
+		j = -1;
 		while (++j < 4) {
+			k = -1;
 			while (++k < 15) {
 				if (strncmp(str[i], str[j], k) == 0 && ft_strnequ(str[i], str[j], k) != 1) {
 					dprintf(1, "\x1b[31mFail\x1b[0m\n	Params:\n		s1 : '%s'\n		s2 : '%s'\n		k : %d\n\n		Valeur attendue : 1\n		Valeur obtenue : %d\n", str[i], str[j],k,ft_strnequ(str[i], str[j], k));
@@ -309,6 +312,25 @@ void	test_strsplit()
 	}
 
 	if (tab[3] != 0) {
+		dprintf(1, "\x1b[31mFail\x1b[0m Le tableau n'est pas termine par 0.n");
+		return;
+	}
+
+	if (strcmp(tab2[0], "salut") != 0) {
+		dprintf(1, "\x1b[31mFail\x1b[0m\n	Params:\n		s : salut**les*koupins*\n\n		Valeur attendue (1er element du tableau): salut		Valeur obtenue : %s\n", tab2[0]);
+		return;
+	}
+	if (strcmp(tab2[1], "les") != 0) {
+		dprintf(1, "\x1b[31mFail\x1b[0m\n	Params:\n		s : salut**les*koupins*\n\n		Valeur attendue (2er element du tableau): les		Valeur obtenue : %s\n", tab2[1]);
+		return;
+	}
+
+	if (strcmp(tab2[2], "koupins") != 0) {
+		dprintf(1, "\x1b[31mFail\x1b[0m\n	Params:\n		s : salut**les*koupins*\n\n		Valeur attendue (3er element du tableau): koupins		Valeur obtenue : %s\n", tab2[2]);
+		return;
+	}
+
+	if (tab2[3] != 0) {
 		dprintf(1, "\x1b[31mFail\x1b[0m Le tableau n'est pas termine par 0.n");
 		return;
 	}
